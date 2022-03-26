@@ -4,15 +4,8 @@ import Debug from 'debug';
 const debug = Debug('server:db');
 
 const connectDB = () => {
-  const dbUri = process.env.DB_URI;
-
-  if (!dbUri) {
-    throw new Error('DB_URI not defined');
-  }
-
-  const dbConnection = mongoose.connect(dbUri);
-  debug(`connected to database ${dbUri}`);
-
+  const dbConnection = mongoose.connect(process.env.DB_URI as string);
+  debug(`connected to database: ${process.env.DB_URI}`);
   return dbConnection;
 };
 export default connectDB;

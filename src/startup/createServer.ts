@@ -3,7 +3,7 @@ import http from 'http';
 import Debug from 'debug';
 const debug = Debug('server:runServer');
 
-const createServer = (app: Express) => {
+const createServer = (app: Express, cb: () => void) => {
   const port = normalizePort(process.env.PORT || '3000');
   app.set('port', port);
 
@@ -75,6 +75,7 @@ const createServer = (app: Express) => {
     let addr = server.address();
     let bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr?.port;
     debug('Listening on ' + bind);
+    cb();
   }
 };
 
